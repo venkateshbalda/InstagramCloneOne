@@ -102,9 +102,9 @@ public class ControllerClass {
 	}
 	
 	@PutMapping("/updateuser")
-	public PojoClass updateUser(@RequestBody PojoClass pojo) {
+	public String updateUser(@RequestBody PojoClass pojo) {
 		repo.save(pojo);
-		return pojo;
+		return("user updated");
 	}
 		
 }
