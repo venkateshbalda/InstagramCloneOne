@@ -10,5 +10,7 @@ import com.venkyb.instagramone.PojoClass.posts;
 public interface postsInterface extends JpaRepository<posts, Integer>{
 	@Query("FROM posts WHERE userid=?1 ORDER BY userid")
 	List<posts> getByUserid(int userid);
+	@Query("FROM posts WHERE postid=?1 ORDER BY postid")
+	List<posts> getByPostid(int postid);
 
 }

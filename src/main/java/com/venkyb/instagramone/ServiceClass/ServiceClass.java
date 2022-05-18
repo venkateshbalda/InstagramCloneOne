@@ -21,4 +21,9 @@ public class ServiceClass {
 		return "ServiceClass [CurrentUserId=" + CurrentUserId + ", CurrentUserName=" + CurrentUserName + "]";
 	}
 	
+	public String getCurrentLoggedInUser() {
+		String currentloggeduser="rimuru";
+		return(currentloggeduser);
+	}
+	
 }

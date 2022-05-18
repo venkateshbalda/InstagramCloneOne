@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.venkyb.instagramone.RepoInterface.FollowersInterface;
 import com.venkyb.instagramone.RepoInterface.RepoInterface;
 import com.venkyb.instagramone.RepoInterface.postsInterface;
 import com.venkyb.instagramone.PojoClass.*;
+import com.venkyb.instagramone.ControllerClass.*;
 import com.venkyb.instagramone.ServiceClass.*;
 @RestController
 public class ControllerClass {
@@ -29,6 +31,11 @@ public class ControllerClass {
 	
 	@Autowired
 	postsInterface posts;
+	
+	@Autowired
+	FollowersInterface followrepo;
+
+	String currentUsername=new ServiceClass().getCurrentLoggedInUser();
 	
 	@RequestMapping("/")
 	public String home() {
@@ -40,7 +47,6 @@ public class ControllerClass {
 		return repo.findAll();
 	}
 
-	
 	@PostMapping("/adduser")
 	public String addUser(PojoClass pojo){
 		try {
@@ -49,31 +55,29 @@ public class ControllerClass {
 		}
 		catch(Exception e){
 			repo.save(pojo);
+			String uname = repo.getByUName(pojo.getUsername()).get(0).getUsername();
+			int uid = repo.getByUName(uname).get(0).getId();
+			System.out.println(uname);
+			System.out.println(uid);
+			addUserInFollowers(uid);
 			return("user added");
+			}	
 	}
-		
-	}
-		
 	
-	String currentUsername="venkybalda";
-	@PostMapping("/addpost")
-	public posts addPost(posts post) {
-		int uid = repo.getByUName(currentUsername).get(0).getId();
-		//LocalDateTime now = LocalDateTime.now();
-		String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
-		String imageurl = "dummy post image path, will use it in the future probably";
-		post.setTimestamp(timestamp);
-		post.setImageurl(imageurl);
-		post.setUserid(uid);
-		post.setUsername(currentUsername);
-		posts.save(post);
-		return post;
+	public void addUserInFollowers(int uid) {
+		FollowersClass user=new FollowersClass();
+		user.setUserid(uid);
+		user.setFollowingme("#");
+		user.setIamfollowing("#");
+		followrepo.save(user);
+		System.out.println("user added in followers table");
 	}
 	
 	@GetMapping("/username/{uname}")
 	public List<PojoClass> getUser(@PathVariable("uname") String uname) {
 		return repo.getByUName(uname);
 	}
+	
 	@GetMapping("/userid/{uid}")
 	public Optional<PojoClass> getUser(@PathVariable("uid") int uid) {
 		return repo.findById(uid);
@@ -103,41 +107,4 @@ public class ControllerClass {
 		return pojo;
 	}
 		
-	@PutMapping("/updatepost")
-	public String updatePost(posts post) {
-		int uid = repo.getByUName(currentUsername).get(0).getId();
-		//LocalDateTime now = LocalDateTime.now();
-		String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
-		String imageurl = "dummy post image path, will use it in the future probably";
-		post.setTimestamp(timestamp);
-		post.setImageurl(imageurl);
-		post.setUserid(uid);
-		post.setUsername(currentUsername);
-		posts.save(post);
-		return("post updated");
-	}
-	
-	@GetMapping("/posts")
-	public List<posts> getPosts(){
-		return posts.findAll();
-	}
-	
-	@GetMapping("/posts/{uname}")
-	public List<posts> getPostByUser(@PathVariable("uname") String uname){
-		int uid = getUser(uname).get(0).getId();
-		return posts.getByUserid(uid);
-	}
-	
-	@GetMapping("/myposts")
-	public List<posts> getMyPosts(){
-		int uid = repo.getByUName(currentUsername).get(0).getId();
-		return posts.getByUserid(uid);
-	}
-	
-	@DeleteMapping("/postid/{pid}")
-	public String deletePost(@PathVariable("pid") int pid) {
-		posts.deleteById(pid);
-		return("post deleted");	
-	}
-	
 }

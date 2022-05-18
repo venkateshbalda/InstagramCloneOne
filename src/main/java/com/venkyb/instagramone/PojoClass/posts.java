@@ -18,6 +18,22 @@ public class posts {
 	private int userid;
 	@Column(name="username")
 	private String username;
+	@Column(name="likes")
+	private int likes;
+	@Column(name="likedby")
+	private String likedby;
+	public String getLikedby() {
+		return likedby;
+	}
+	public void setLikedby(String likedby) {
+		this.likedby = likedby;
+	}
+	public int getLikes() {
+		return likes;
+	}
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
 	public String getUsername() {
 		return username;
 	}
