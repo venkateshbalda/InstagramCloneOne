@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="user")
+@Table(name="user", schema = "public")
 public class PojoClass {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

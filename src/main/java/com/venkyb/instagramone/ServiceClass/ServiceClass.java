@@ -22,7 +22,7 @@ public class ServiceClass {
 	}
 	
 	public String getCurrentLoggedInUser() {
-		String currentloggeduser="rimuru";
+		String currentloggeduser="venky";
 		return(currentloggeduser);
 	}
 	

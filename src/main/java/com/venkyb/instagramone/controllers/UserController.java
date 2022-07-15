@@ -32,7 +32,7 @@ public class UserController {
 	
 	@RequestMapping("/")
 	public String home() {
-		return("juat the home page nothing to see here");
+		return("just the home page nothing to see here");
 	}
 	
 	@GetMapping("/users")
