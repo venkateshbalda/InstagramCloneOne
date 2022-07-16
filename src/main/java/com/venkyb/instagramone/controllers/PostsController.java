@@ -72,6 +72,7 @@ public class PostsController {
 		if(posts.getByPostid(pid).get(0).getLikedby().contains("#"+uid+"#")) {
 			int noOflikes = posts.getByPostid(pid).get(0).getLikes()-1;
 			buildLikes(pid, likes, noOflikes);
+			likes.setLikes(noOflikes);
 			likes.setLikedby(posts.getByPostid(pid).get(0).getLikedby().replace("#"+uid+"#", "#"));
 			posts.save(likes);
 			System.out.println(posts.getByPostid(pid).get(0).getLikes());
@@ -80,6 +81,7 @@ public class PostsController {
 		else {
 			int noOflikes = posts.getByPostid(pid).get(0).getLikes()+1;
 			buildLikes(pid, likes, noOflikes);
+			likes.setLikes(noOflikes);
 			likes.setLikedby(posts.getByPostid(pid).get(0).getLikedby()+uid+"#");
 			posts.save(likes);
 			System.out.println(posts.getByPostid(pid).get(0).getLikes());
@@ -94,7 +96,6 @@ public class PostsController {
 		likes.setTimestamp(posts.getByPostid(pid).get(0).getTimestamp());
 		likes.setUserid(posts.getByPostid(pid).get(0).getUserid());
 		likes.setUsername(posts.getByPostid(pid).get(0).getUsername());
-		likes.setLikes(posts.getByPostid(pid).get(0).getLikes());
 		
 	}
 	
