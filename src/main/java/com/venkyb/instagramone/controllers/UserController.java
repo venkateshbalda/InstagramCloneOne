@@ -44,7 +44,7 @@ public class UserController {
 	public String addUser(PojoClass pojo){
 		try {
 			System.out.println(repo.getByUName(pojo.getUsername()).get(0).getUsername());
-			return("user already present, try another one");
+			return("username already present, try another one");
 		}
 		catch(Exception e){
 			repo.save(pojo);
