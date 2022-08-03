@@ -10,7 +10,7 @@ import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties
 
 
 @SpringBootApplication
-@EnableEncryptableProperties
+//@EnableEncryptableProperties
 //@EnableSwagger2
 //@EnableWebMvc
 public class InstagramCloneOneApplication {

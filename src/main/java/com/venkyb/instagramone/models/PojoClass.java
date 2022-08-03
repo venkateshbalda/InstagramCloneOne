@@ -26,6 +26,14 @@ public class PojoClass {
 	private String email;
 	@Column(name="phonenumber")
 	private String phonenumber;
+	@Column(name="password")
+	private String password;
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public String getFirstname() {
 		return firstname;
 	}

@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    password: ''
+    url: jdbc:mysql://127.0.0.1:3306/instagramclone
+    username: root
+  sql:
+    init:
+      mode: always

@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.*;
 
 import com.venkyb.instagramone.ServiceClass.ServiceClass;
@@ -47,6 +48,7 @@ public class UserController {
 			return("username already present, try another one");
 		}
 		catch(Exception e){
+			pojo.setPassword(pojo.getPassword());
 			repo.save(pojo);
 			int uid = getUserId(pojo);
 			addUserInFollowers(uid);
