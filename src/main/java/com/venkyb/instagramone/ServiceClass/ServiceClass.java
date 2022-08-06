@@ -1,5 +1,8 @@
 package com.venkyb.instagramone.ServiceClass;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class ServiceClass {
 	private int CurrentUserId;
 	private String CurrentUserName;

@@ -13,7 +13,7 @@ import com.venkyb.instagramone.repository.RepoInterface;
 
 public class FollowersService {
 	
-	@Autowired
+/*	@Autowired
 	RepoInterface repo;
 	@Autowired
 	FollowersInterface followrepo;
@@ -126,4 +126,5 @@ public class FollowersService {
 		return followersList;
 		
 	}
+	*/
 }
