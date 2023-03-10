@@ -1,0 +1,20 @@
+#spring.datasource.url= jdbc:postgresql://ojyqmygfwrvzqo:1a4d585ebce8e6d0963414e4744dbccb5efd62b1c17f5b8ee49ef40091a31399@ec2-3-219-229-143.compute-1.amazonaws.com:5432/d51jl55em919q
+#spring.datasource.username= ojyqmygfwrvzqo
+#spring.datasource.password= 1a4d585ebce8e6d0963414e4744dbccb5efd62b1c17f5b8ee49ef40091a31399
+#spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation= true
+#spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.PostgreSQLDialect
+#spring.jpa.hibernate.ddl-auto= update
+
+spring:
+ datasource:
+  url: jdbc:postgresql://ojyqmygfwrvzqo:1a4d585ebce8e6d0963414e4744dbccb5efd62b1c17f5b8ee49ef40091a31399@ec2-3-219-229-143.compute-1.amazonaws.com:5432/d51jl55em919q
+  username: ojyqmygfwrvzqo
+  password: 1a4d585ebce8e6d0963414e4744dbccb5efd62b1c17f5b8ee49ef40091a31399
+ jpa:
+  hibernate:
+   ddl-auto: update
+  properties:
+   hibernate:
+    jdbc:
+     lob:
+      non_contextual_creation: true

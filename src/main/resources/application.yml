@@ -1,0 +1,83 @@
+server:
+  port: 8082
+spring:
+  profiles:
+    active:
+    - pgadmin
+  rabbitmq:
+    listener:
+     direct:
+        auto-startup: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+      
+    shutdown:
+      enabled: true
+
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile:
+      - xampp
+  datasource:
+    password: ''
+    url: jdbc:mysql://127.0.0.1:3306/instagramclone
+    username: root
+  sql:
+    init:
+      mode: always
+server:
+  port: 8083
+--- 
+
+spring:
+  config:
+    activate:
+      on-profile:
+      - pgadmin
+  datasource:
+    password: Bvenky@22
+    url: jdbc:postgresql://localhost:5433/InstagramCloneOne
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+server:
+  port: 8084
+---
+
+spring:
+ config:
+    activate:
+      on-profile:
+      - herokupostgres
+ datasource:
+  url: jdbc:postgresql://ojyqmygfwrvzqo:1a4d585ebce8e6d0963414e4744dbccb5efd62b1c17f5b8ee49ef40091a31399@ec2-3-219-229-143.compute-1.amazonaws.com:5432/d51jl55em919q
+  username: ojyqmygfwrvzqo
+  password: 1a4d585ebce8e6d0963414e4744dbccb5efd62b1c17f5b8ee49ef40091a31399
+ jpa:
+  hibernate:
+   ddl-auto: update
+  properties:
+   hibernate:
+    jdbc:
+     lob:
+      non_contextual_creation: true

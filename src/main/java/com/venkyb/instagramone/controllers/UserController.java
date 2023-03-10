@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +19,12 @@ import com.venkyb.instagramone.repository.RepoInterface;
 import com.venkyb.instagramone.repository.postsInterface;
 
 
+
 @RestController
 public class UserController {
+	
+	private static final Logger logger = LogManager.getLogger(UserController.class);
+	
 	
 	@Autowired
 	RepoInterface repo;
@@ -33,25 +39,31 @@ public class UserController {
 	
 	@RequestMapping("/")
 	public String home() {
+		logger.info("home page is received");
 		return("just the home page nothing to see here");
 	}
 	
 	@GetMapping("/users")
 	public List<PojoClass> getUsers(){
+		logger.info("get all users is requested");
 		return repo.findAll();
 	}
 
 	@PostMapping("/adduser")
 	public String addUser(PojoClass pojo){
+		logger.info("adding a user is started");
 		try {
 			System.out.println(repo.getByUName(pojo.getUsername()).get(0).getUsername());
+			logger.info("username already present in db");
 			return("username already present, try another one");
 		}
 		catch(Exception e){
+			logger.info("username is not present in db");
 			pojo.setPassword(pojo.getPassword());
 			repo.save(pojo);
 			int uid = getUserId(pojo);
 			addUserInFollowers(uid);
+			logger.info("new user is created");
 			return("user added");
 			}	
 	}
@@ -95,6 +107,7 @@ public class UserController {
 	@DeleteMapping("/userid/{uid}")
 	public String deleteUser(@PathVariable("uid") int uid) {
 		repo.deleteById(uid);
+		logger.info("the user "+uid+"is delted from db");
 		return("user deleted");	
 	}
 
@@ -103,6 +116,7 @@ public class UserController {
 	@DeleteMapping("/username/{uname}")
 	public String deleteUser(@PathVariable("uname") String uname) {
 		repo.deleteByUsername(uname);
+		logger.info("the user "+uname+"is delted from db");
 		return("user deleted");
 		
 	}
